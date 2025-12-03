@@ -678,7 +678,9 @@ module Minitest
       r.time       = o.time
       r.metadata   = o.metadata if o.metadata?
 
-      r.source_location = o.method(o.name).source_location rescue ["unknown", -1]
+      unless o.failures.empty?
+        r.source_location = o.method(o.name).source_location rescue ["unknown", -1]
+      end
 
       r
     end
